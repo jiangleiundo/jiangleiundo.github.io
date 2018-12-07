@@ -7,20 +7,20 @@
   
   <title>node.js学习（2） | 一个程序员的朝圣之路</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="node.js学习（2）2.1 http构建类似Apache的服务器效果 2.11 代码 const fs = require(&amp;apos;fs&amp;apos;); const http = require(&amp;apos;http&amp;apos;);  //Apache 服务器软件默认有一个 www 目录 //所有存放在 www 目录中的资源都可以通过网址来浏览，我们创建一个类似的测试目录 const te">
+  <meta name="description" content="2.1 http构建类似Apache的服务器效果 2.11 代码 const fs = require(&amp;apos;fs&amp;apos;); const http = require(&amp;apos;http&amp;apos;);  //Apache 服务器软件默认有一个 www 目录 //所有存放在 www 目录中的资源都可以通过网址来浏览，我们创建一个类似的测试目录 const testPath = &amp;ap">
 <meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
 <meta property="og:title" content="node.js学习（2）">
 <meta property="og:url" content="jiangleiundo.github.io/2018/12/07/noded2/index.html">
 <meta property="og:site_name" content="一个程序员的朝圣之路">
-<meta property="og:description" content="node.js学习（2）2.1 http构建类似Apache的服务器效果 2.11 代码 const fs = require(&amp;apos;fs&amp;apos;); const http = require(&amp;apos;http&amp;apos;);  //Apache 服务器软件默认有一个 www 目录 //所有存放在 www 目录中的资源都可以通过网址来浏览，我们创建一个类似的测试目录 const te">
+<meta property="og:description" content="2.1 http构建类似Apache的服务器效果 2.11 代码 const fs = require(&amp;apos;fs&amp;apos;); const http = require(&amp;apos;http&amp;apos;);  //Apache 服务器软件默认有一个 www 目录 //所有存放在 www 目录中的资源都可以通过网址来浏览，我们创建一个类似的测试目录 const testPath = &amp;ap">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.imgur.com/NOJMqaf.jpg">
 <meta property="og:image" content="https://i.imgur.com/GU4HFbR.jpg">
-<meta property="og:updated_time" content="2018-12-07T14:28:49.843Z">
+<meta property="og:updated_time" content="2018-12-07T14:47:18.520Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="node.js学习（2）">
-<meta name="twitter:description" content="node.js学习（2）2.1 http构建类似Apache的服务器效果 2.11 代码 const fs = require(&amp;apos;fs&amp;apos;); const http = require(&amp;apos;http&amp;apos;);  //Apache 服务器软件默认有一个 www 目录 //所有存放在 www 目录中的资源都可以通过网址来浏览，我们创建一个类似的测试目录 const te">
+<meta name="twitter:description" content="2.1 http构建类似Apache的服务器效果 2.11 代码 const fs = require(&amp;apos;fs&amp;apos;); const http = require(&amp;apos;http&amp;apos;);  //Apache 服务器软件默认有一个 www 目录 //所有存放在 www 目录中的资源都可以通过网址来浏览，我们创建一个类似的测试目录 const testPath = &amp;ap">
 <meta name="twitter:image" content="https://i.imgur.com/NOJMqaf.jpg">
   
     <link rel="alternate" href="/atom.xml" title="一个程序员的朝圣之路" type="application/atom+xml">
@@ -94,7 +94,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="node-js学习（2）"><a href="#node-js学习（2）" class="headerlink" title="node.js学习（2）"></a>node.js学习（2）</h1><h2 id="2-1-http构建类似Apache的服务器效果"><a href="#2-1-http构建类似Apache的服务器效果" class="headerlink" title="2.1 http构建类似Apache的服务器效果"></a>2.1 http构建类似Apache的服务器效果</h2><ul>
+        <h2 id="2-1-http构建类似Apache的服务器效果"><a href="#2-1-http构建类似Apache的服务器效果" class="headerlink" title="2.1 http构建类似Apache的服务器效果"></a>2.1 http构建类似Apache的服务器效果</h2><ul>
 <li><p>2.11 代码</p>
 <pre><code>const fs = require(&apos;fs&apos;);
 const http = require(&apos;http&apos;);
@@ -160,7 +160,7 @@ fs.readFile(&apos;./tpl.html&apos;, function (err, data){
 </code></pre></li>
 <li><p>2.22 打印效果对比</p>
 <ul>
-<li>强调：模板引擎不关心你的字符串内容，只关心自己能认识的模板标记语法，例如 <code></code></li>
+<li>强调：模板引擎不关心你的字符串内容，只关心自己能认识的模板标记语法，<br>例如 <code></code></li>
 <li><p><code></code> 语法被称之为 mustache 语法。</p>
 <p><img src="https://i.imgur.com/NOJMqaf.jpg" alt=""><br><img src="https://i.imgur.com/GU4HFbR.jpg" alt=""></p>
 </li>
@@ -172,7 +172,7 @@ fs.readFile(&apos;./tpl.html&apos;, function (err, data){
       
     </div>
     <footer class="article-footer">
-      <a data-url="jiangleiundo.github.io/2018/12/07/noded2/" data-id="cjpe4m7750002n8hwk7xq8du6" class="article-share-link">Share</a>
+      <a data-url="jiangleiundo.github.io/2018/12/07/noded2/" data-id="cjpe5ahx500029khwpgkm172t" class="article-share-link">Share</a>
       
       
     </footer>
