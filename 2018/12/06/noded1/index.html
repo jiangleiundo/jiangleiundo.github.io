@@ -5,21 +5,22 @@
   
 
   
-  <title>一头小野鹿</title>
+  <title>一个程序员的朝圣之路</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Node.js学习（1）了解node.js 1.1 node.js是什么？ Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。 node不是一门语言 node.js不是框架，不是库 node.js是JavaScript运行时环境，简单来讲node.js可以解析和执行JavaScript代码 以前只有浏览器能解析JavaScript代码，有了node.js后Ja">
+<meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一头小野鹿">
-<meta property="og:url" content="http://yoursite.com/2018/12/06/noded1/index.html">
-<meta property="og:site_name" content="一头小野鹿">
+<meta property="og:title" content="一个程序员的朝圣之路">
+<meta property="og:url" content="jiangleiundo.github.io/2018/12/06/noded1/index.html">
+<meta property="og:site_name" content="一个程序员的朝圣之路">
 <meta property="og:description" content="Node.js学习（1）了解node.js 1.1 node.js是什么？ Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。 node不是一门语言 node.js不是框架，不是库 node.js是JavaScript运行时环境，简单来讲node.js可以解析和执行JavaScript代码 以前只有浏览器能解析JavaScript代码，有了node.js后Ja">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-06T14:07:10.543Z">
+<meta property="og:updated_time" content="2018-12-07T02:43:35.749Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一头小野鹿">
+<meta name="twitter:title" content="一个程序员的朝圣之路">
 <meta name="twitter:description" content="Node.js学习（1）了解node.js 1.1 node.js是什么？ Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。 node不是一门语言 node.js不是框架，不是库 node.js是JavaScript运行时环境，简单来讲node.js可以解析和执行JavaScript代码 以前只有浏览器能解析JavaScript代码，有了node.js后Ja">
   
-    <link rel="alternate" href="/atom.xml" title="一头小野鹿" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="一个程序员的朝圣之路" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -38,8 +39,12 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">一头小野鹿</a>
+        <a href="/" id="logo">一个程序员的朝圣之路</a>
       </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Stay Hungry, Stay Foolish</a>
+        </h2>
       
     </div>
     <div id="header-inner" class="inner">
@@ -58,7 +63,7 @@
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="jiangleiundo.github.io"></form>
       </div>
     </div>
   </div>
@@ -205,11 +210,48 @@ server.on(&apos;request&apos;, function (request, response){
 server.listen(3000, function (){
    console.log(&apos;服务器启动成功了，可通过127.0.0.1:3000 访问&apos;);
 });
+</code></pre><h3 id="2-4-使用node构建web服务器结合fs发送文件数据"><a href="#2-4-使用node构建web服务器结合fs发送文件数据" class="headerlink" title="2.4 使用node构建web服务器结合fs发送文件数据"></a>2.4 使用node构建web服务器结合<code>fs</code>发送文件数据</h3><pre><code>// 1. 结合 fs 发送文件中的数据
+// 2. Content-Type
+//  服务端默认发送的数据是 utf8 编码，如果发送数据时有Content-Type则浏览器会按照给定的编码规则解析，否则照当前操作系统的默认编码去解析
+//  不同的资源对应的 Content-Type 不同，图片不需要指定编码，一般只为字符数据才指定编码
+//   http://tool.oschina.net/commons
+const http = require(&apos;http&apos;);
+const fs = require(&apos;fs&apos;);
+
+let server = http.createServer();
+server.on(&apos;request&apos;, function (req, res){
+    let url = req.url;
+    if(url === &apos;/&apos;){
+        fs.readFile(&apos;./resource/index.html&apos;, function (err, data){
+            if(err){
+                res.setHeader(&apos;Content-type&apos;, &apos;text/plain; charset=utf-8&apos;);
+                res.end(&apos;读取文件失败&apos;)
+            }else{
+                res.setHeader(&apos;Content-type&apos;, &apos;text/html; charset=utf-8&apos;);
+                res.end(data);
+            }
+        });
+    }else if(url === &apos;/baby&apos;){
+        fs.readFile(&apos;./resource/ab2.jpg&apos;, function (err, data){
+            if(err){
+                res.setHeader(&apos;Content-type&apos;, &apos;text/plain; charset=utf-8&apos;);
+                res.end(&apos;读取图片失败&apos;)
+            }else{
+                res.setHeader(&apos;Content-type&apos;, &apos;charset=utf-8&apos;);
+                res.end(data);
+            }
+        })
+    }
+});
+
+server.listen(3000, function (){
+   console.log(&apos;server is running .......&apos;);
+});
 </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/06/noded1/" data-id="cjpcq8u5t000268hwrfwhloai" class="article-share-link">Share</a>
+      <a data-url="jiangleiundo.github.io/2018/12/06/noded1/" data-id="cjpdffhn70000fohw6uvrdquw" class="article-share-link">Share</a>
       
       
     </footer>
