@@ -15,13 +15,10 @@
 <meta property="og:site_name" content="一个程序员的朝圣之路">
 <meta property="og:description" content="2.1 http构建类似Apache的服务器效果 2.11 代码  12345678910111213141516171819202122232425262728293031const fs = require(&apos;fs&apos;);const http = require(&apos;http&apos;);//Apache 服务器软件默认有一个 www 目录//所有存放在 www 目录中的资源都可以通过网址来浏览，我们创建">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.imgur.com/NOJMqaf.jpg">
-<meta property="og:image" content="https://i.imgur.com/GU4HFbR.jpg">
-<meta property="og:updated_time" content="2018-12-08T03:06:29.003Z">
+<meta property="og:updated_time" content="2018-12-08T03:13:34.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="node.js学习（2）">
 <meta name="twitter:description" content="2.1 http构建类似Apache的服务器效果 2.11 代码  12345678910111213141516171819202122232425262728293031const fs = require(&apos;fs&apos;);const http = require(&apos;http&apos;);//Apache 服务器软件默认有一个 www 目录//所有存放在 www 目录中的资源都可以通过网址来浏览，我们创建">
-<meta name="twitter:image" content="https://i.imgur.com/NOJMqaf.jpg">
   
     <link rel="alternate" href="/atom.xml" title="一个程序员的朝圣之路" type="application/atom+xml">
   
@@ -103,20 +100,16 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// npm install art-template</span></span><br><span class="line"><span class="comment">// 该命令在哪执行就会把包下载到哪里。默认会下载到 node_modules 目录中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 Node 中使用 art-template 模板引擎</span></span><br><span class="line"><span class="comment">// 1. 安装 npm install art-template</span></span><br><span class="line"><span class="comment">// 2. 在需要使用的文件模块中加载 art-template 加载方法require('art-template')</span></span><br><span class="line"><span class="comment">//    参数中的 art-template 就是你下载的包的名字</span></span><br><span class="line"><span class="comment">// 3. 查文档，使用模板引擎的 API</span></span><br><span class="line"><span class="keyword">const</span> template = <span class="built_in">require</span>(<span class="string">'art-template'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'./tpl.html'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">'Not Find tpl.html'</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//注意，readFile读取的data是二进制的，template需要的时字符串所以要data.toString()</span></span><br><span class="line">   <span class="keyword">let</span> ret = template.render(data.toString(), &#123;</span><br><span class="line">       title: <span class="string">'i am title'</span>,</span><br><span class="line">       name: <span class="string">'jack'</span>,</span><br><span class="line">       age: <span class="number">18</span>,</span><br><span class="line">       province: <span class="string">'beijing'</span>,</span><br><span class="line">       hobbies: [<span class="string">'eat'</span>, <span class="string">'play'</span>, <span class="string">'code'</span>]</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line">   <span class="built_in">console</span>.log(ret);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>2.22 打印效果对比</p>
-<ul>
-<li>强调：模板引擎不关心你的字符串内容，只关心自己能认识的模板标记语法，<br>例如 <code></code></li>
-<li><p>这种 <code></code> 语法被称之为 mustache 语法。</p>
-<p><img src="https://i.imgur.com/NOJMqaf.jpg" alt=""><br><img src="https://i.imgur.com/GU4HFbR.jpg" alt=""></p>
-</li>
+<li>2.22 打印效果对比</li>
 </ul>
-</li>
-</ul>
-
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//强调：模板引擎不关心你的字符串内容，只关心自己能认识的模板标记语法，例如 &#123;&#123; value &#125;&#125;</span></span><br><span class="line"><span class="comment">//这种 &#123;&#123; value &#125;&#125; 语法被称之为 mustache 语法。</span></span><br></pre></td></tr></table></figure>
+<pre><code>![](https://i.imgur.com/NOJMqaf.jpg)
+![](https://i.imgur.com/GU4HFbR.jpg)
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="jiangleiundo.github.io/2018/12/07/noded2/" data-id="cjpevbpxm0003yghw9ugiqvz9" class="article-share-link">Share</a>
+      <a data-url="jiangleiundo.github.io/2018/12/07/noded2/" data-id="cjpevyh9e0003eghwhri0jkyl" class="article-share-link">Share</a>
       
       
     </footer>
