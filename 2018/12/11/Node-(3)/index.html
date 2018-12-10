@@ -1,0 +1,117 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="web前端开发"><title>Node.js学习（3） | XFK</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Node.js学习（3）</h1><a id="logo" href="/.">XFK</a><p class="description">Stay Hungry Stay Foolish</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Node.js学习（3）</h1><div class="post-meta">Dec 11, 2018</div><div class="post-content"><p>require方法的加载规则，了解npm的常用命令和如何切换到淘宝npm镜像<br><a id="more"></a></p>
+<h2 id="require方法的加载规则"><a href="#require方法的加载规则" class="headerlink" title="require方法的加载规则"></a>require方法的加载规则</h2><blockquote>
+<p>如果想了解更多底层的细节，可参考: 朴灵写的《深入浅出node.js》<br><a href="https://www.infoq.cn/article/nodejs-module-mechanism" target="_blank" rel="noopener">深入浅出 Node.js（三）：深入 Node.js 的模块机制</a></p>
+</blockquote>
+<ul>
+<li>require(‘模块标识’)</li>
+<li>优先从缓存加载</li>
+<li>判断模块标识<ul>
+<li>核心模块</li>
+<li>第三方模块</li>
+<li>自己写的模块</li>
+</ul>
+</li>
+</ul>
+<h3 id="路径形式的模块标识"><a href="#路径形式的模块标识" class="headerlink" title="路径形式的模块标识"></a>路径形式的模块标识</h3><ul>
+<li>./ 当前目录，不可省略</li>
+<li>../ 上一级目录，不可省略</li>
+<li>/ 在这里表示的是当前文件模块所属磁盘根路径<ul>
+<li>.js后缀名可以省略，eg：加载main.js可以写成  require(‘./main’)</li>
+</ul>
+</li>
+<li>核心模块的本质也是文件，核心模块文件已经被编译到了二进制文件中，只需要按名字加载就行了<ul>
+<li>eg:  require(‘http’)</li>
+</ul>
+</li>
+</ul>
+<h3 id="第三方模块"><a href="#第三方模块" class="headerlink" title="第三方模块"></a>第三方模块</h3><ul>
+<li>凡是第三方模块都必须通过 npm 来下载</li>
+<li>通过 require(‘包名’) 的方式来加载才可以使用 eg: require(‘art-template’) </li>
+<li><p>既不是核心模块、也不是路径形式的模块</p>
+<ul>
+<li><p>先找到当前文件所处目录中的 node_modules 目录</p>
+</li>
+<li><p>node_modules/art-template/package.json 文件</p>
+</li>
+<li><p>package.json 文件中的 main 属性 (main 属性中就记录了 art-template 的入口模块)</p>
+</li>
+<li><p>然后加载第三方包，实际上加载的还是文件</p>
+</li>
+<li><p>如果 package.json 文件不存在或者 main 指定的入口模块是也没有 node 会自动找该目录下的     index.js</p>
+</li>
+<li><p>如果以上所有任何一个条件都不成立，则会进入上一级目录中的 node_modules 目录查找</p>
+</li>
+<li><p>如果上一级还没有，则继续往上上一级查找，如果直到当前磁盘根目录还找不到，最后报错：</p>
+<ul>
+<li>can not find module xxx</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一个项目有且只有一个 node_modules，放在项目根目录中，这样项目中所有的子目录中的    代码都可以加载到第三方包 </li>
+</ul>
+<h2 id="npm-（node-package-manager）"><a href="#npm-（node-package-manager）" class="headerlink" title="npm （node package manager）"></a>npm （node package manager）</h2><h3 id="npm网站"><a href="#npm网站" class="headerlink" title="npm网站"></a>npm网站</h3><blockquote>
+<p><a href="www.npmjs.com">npm官网</a></p>
+</blockquote>
+<h3 id="npm命令行工具"><a href="#npm命令行工具" class="headerlink" title="npm命令行工具"></a>npm命令行工具</h3><ul>
+<li>npm是一个命令行工具，只要安装了node就安装了npm</li>
+<li>查看npm版本</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm --version</span><br></pre></td></tr></table></figure>
+<ul>
+<li>升级npm</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --global npm</span><br></pre></td></tr></table></figure>
+<h3 id="npm常用命令"><a href="#npm常用命令" class="headerlink" title="npm常用命令"></a>npm常用命令</h3><ul>
+<li><p>npm init</p>
+<ul>
+<li>npm init -y 直接生成，跳过向导</li>
+</ul>
+</li>
+<li><p>npm install</p>
+<ul>
+<li>npm install 包名<ul>
+<li>只下载</li>
+</ul>
+</li>
+<li>npm install 包名 –save<ul>
+<li>下载并保存依赖项（package.json文件中的dependencies选项）</li>
+<li>npm i -S 包名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>npm uninstall 包名</p>
+<ul>
+<li>只删除，不删除依赖项</li>
+<li>npm un</li>
+</ul>
+</li>
+<li><p>npm uninstall 包名 –save</p>
+<ul>
+<li>删除包和依赖项</li>
+<li>npm un -S</li>
+</ul>
+</li>
+<li><p>npm –help</p>
+<ul>
+<li>查看使用命令</li>
+<li>eg:查看uninstall的简写  npm uninstall –help</li>
+</ul>
+</li>
+</ul>
+<h3 id="npm切换到淘宝"><a href="#npm切换到淘宝" class="headerlink" title="npm切换到淘宝"></a>npm切换到淘宝</h3><ul>
+<li><p>安装淘宝cnpm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#在任意目录下都可执行,--global是全局安装，不可省略</span><br><span class="line">npm install --global cnpm</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来安装包的时候将<code>npm</code>变成<code>cnpm</code>就行了，举个栗子：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>使用npm，速度较慢</span><br><span class="line">npm install jquery</span><br><span class="line"><span class="meta">#</span>使用淘宝镜像</span><br><span class="line">cnpm install jquery</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不想安装<code>cnpm</code>又想通过淘宝镜像下载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install jquery --registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以把这个选型配置到文件中，这样不用每一次都很麻烦</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org</span><br><span class="line"><span class="meta">#</span>查看是否配置成功，不成功就重新运行</span><br><span class="line">npm config list 或者 npm config get registry</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</div><div class="tags"></div><div class="post-nav"><a class="next" href="/2018/12/08/noded2-2/">Node.js学习（2-2）</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="20" placeholder="Search"><input type="hidden" name="si" value="jiangleiundo.github.io"><input name="tn" type="hidden" value="bds"><input name="cl" type="hidden" value="3"><input name="ct" type="hidden" value="2097152"><input name="s" type="hidden" value="on"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/12/11/Node-(3)/">Node.js学习（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/08/noded2-2/">Node.js学习（2-2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/07/noded2/">Node.js学习（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/06/noded1/">Node.js学习（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/20/hexo-git/">hexo+GitHub构建blog</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/20/hello-world/">Hello World</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://github.com/tufu9441/maupassant-hexo" title="hexo主题-maupassant" target="_blank">hexo主题-maupassant</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">XFK.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
