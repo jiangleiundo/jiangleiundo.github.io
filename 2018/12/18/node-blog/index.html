@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="web前端开发"><title>node-blog | 小方块</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">node-blog</h1><a id="logo" href="/.">小方块</a><p class="description">Stay Hungry Stay Foolish</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">node-blog</h1><div class="post-meta">Dec 18, 2018<span> | </span><span class="category"><a href="/categories/Study/">Study</a></span></div><div class="post-content"><p>这是一篇关于关于信息发布平台的blog<br><a id="more"></a></p>
+<h2 id="1-start"><a href="#1-start" class="headerlink" title="1. start"></a>1. start</h2><h3 id="1-1-目录结构"><a href="#1-1-目录结构" class="headerlink" title="1.1 目录结构"></a>1.1 目录结构</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">├─app.js             项目入口文件</span><br><span class="line">├─controllers</span><br><span class="line">├─models			存储使用mongoose设计的数据模型</span><br><span class="line">├─node_modules		 第三方包	</span><br><span class="line">├─package.json		 包的描述文件</span><br><span class="line">├─package-lock.json	  第三方包版本锁定文件（npm5 之后才有）</span><br><span class="line">├─public			 公共静态资源</span><br><span class="line">├─routes			 如果业务较多就把路由按照业务分类，存储到router目录中</span><br><span class="line">├─routes.js			 简单一点就把所有的路由都放到这个文件中</span><br><span class="line">├─README.md		 	 项目说明文档</span><br><span class="line">└─views				存储视图目录</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-初始化"><a href="#1-2-初始化" class="headerlink" title="1.2 初始化"></a>1.2 初始化</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 初始化</span></span><br><span class="line">npm init -y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 为发布到GitHub做准备</span></span><br><span class="line">git init</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装mongoose</span></span><br><span class="line">npm i express mongoose</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装art-template</span></span><br><span class="line">npm i art-template express-art-template</span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意： 在node中除了art-template还有其很多第三方模板引擎可以使用，比如：ejs，jade（pug），handlebars，nunjucks等</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-app-js中配置art-template"><a href="#2-app-js中配置art-template" class="headerlink" title="2. app.js中配置art-template"></a>2. app.js中配置art-template</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"></span><br><span class="line">app.use(<span class="string">'/public/'</span>, express.static(path.join(__dirname, <span class="string">'./public/'</span>)));</span><br><span class="line">app.use(<span class="string">'/node_modules/'</span>, express.static(path.join(__dirname, <span class="string">'./node_modules/'</span>)));</span><br><span class="line"></span><br><span class="line">app.engine(<span class="string">'html'</span>, <span class="built_in">require</span>(<span class="string">'express-art-template'</span>));</span><br><span class="line"><span class="comment">// art-template默认就是从 ./views 这个目录获取文件，也可以通过</span></span><br><span class="line"><span class="comment">// 下面的方法修改指定的目录</span></span><br><span class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'./views/'</span>));</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">    res.render(<span class="string">'index.html'</span>, &#123;<span class="attr">name</span>: <span class="string">'jack'</span>&#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'server is running ...'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="3-art-template模板继承"><a href="#3-art-template模板继承" class="headerlink" title="3. art-template模板继承"></a>3. art-template模板继承</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--layout.html，公共的css和js也在这个页面引进来，同时留几个‘坑’--&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"/node_modules/bootstrap/dist/css/bootstrap.css"</span>&gt;</span></span><br><span class="line">    &#123;&#123; block 'myCss' &#125;&#125;&#123;&#123; /block &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">&#123;&#123; include './header.html' &#125;&#125;</span><br><span class="line"><span class="comment">&lt;!--在下面留个坑，方便填入内容--&gt;</span></span><br><span class="line">&#123;&#123; block 'content' &#125;&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>默认内容<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">&#123;&#123; /block &#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#123; include './footer.html' &#125;&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/node_modules/jquery/dist/jquery.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/node_modules/bootstrap/dist/js/bootstrap.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&#123;&#123; block 'myJs' &#125;&#125;&#123;&#123; /block &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--index.html--&gt;</span></span><br><span class="line">&#123;&#123; extend './layout.html' &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--在继承页面写自己的css--&gt;</span></span><br><span class="line">&#123;&#123; block 'myCss' &#125;&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    body &#123; background: lightblue;&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">&#123;&#123; /block &#125;&#125;</span><br><span class="line"><span class="comment">&lt;!--在继承页面更新内容--&gt;</span></span><br><span class="line">&#123;&#123; block 'content' &#125;&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>i am new content<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&#123;&#123; /block &#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--在继承页面写自己的js--&gt;</span></span><br><span class="line">&#123;&#123; block 'myJs' &#125;&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&#123;&#123; /block &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-路由设计"><a href="#4-路由设计" class="headerlink" title="4. 路由设计"></a>4. 路由设计</h2><table>
+<thead>
+<tr>
+<th>路径</th>
+<th>方法</th>
+<th>get参数</th>
+<th>post参数</th>
+<th>是否需要权限</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/</td>
+<td>GET</td>
+<td></td>
+<td></td>
+<td></td>
+<td>渲染首页</td>
+</tr>
+<tr>
+<td>/register</td>
+<td>GET</td>
+<td></td>
+<td></td>
+<td></td>
+<td>渲染注册页</td>
+</tr>
+<tr>
+<td>/register</td>
+<td>POST</td>
+<td></td>
+<td>email,nickname,password</td>
+<td></td>
+<td>处理注册请求</td>
+</tr>
+<tr>
+<td>/login</td>
+<td>GET</td>
+<td></td>
+<td></td>
+<td></td>
+<td>渲染登录页面</td>
+</tr>
+<tr>
+<td>/login</td>
+<td>POST</td>
+<td></td>
+<td>email,password</td>
+<td></td>
+<td>处理登录请求</td>
+</tr>
+<tr>
+<td>/logout</td>
+<td>GET</td>
+<td></td>
+<td></td>
+<td></td>
+<td>处理退出请求</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-md5加密"><a href="#5-md5加密" class="headerlink" title="5. md5加密"></a>5. md5加密</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装加密包</span></span><br><span class="line">npm install blueimp-md5</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 安全起见双层加密</span></span><br><span class="line">md5(md5(password))</span><br></pre></td></tr></table></figure>
+<h2 id="6-SESSION问题"><a href="#6-SESSION问题" class="headerlink" title="6. SESSION问题"></a>6. SESSION问题</h2><ul>
+<li><code>express</code>默认不支持 Session 和 Cookie 但是我们可以使用第三方中间件：express-session 来解决</li>
+<li>安装：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install express-session</span><br></pre></td></tr></table></figure>
+<ul>
+<li>引入：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一定要在 app.use(router) 之前</span></span><br><span class="line">app.use(session(&#123;</span><br><span class="line">    <span class="comment">// 配置加密字符串，它会在原有加密基础之上和这个字符串拼起来去加密</span></span><br><span class="line">    <span class="comment">// 目的是为了增加安全性，防止客户端恶意伪造</span></span><br><span class="line">    secret: <span class="string">'xfkblog'</span>,</span><br><span class="line">    resave: <span class="literal">false</span>,</span><br><span class="line">    saveUninitialized: <span class="literal">false</span> <span class="comment">// 当为true时无论你是否使用 Session ，都默认直接给你分配一把钥匙</span></span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//    当把这个插件配置好之后，我们就可以通过 req.session 来发访问和设置 Session 成员了</span></span><br><span class="line"><span class="comment">//    添加 Session 数据：</span></span><br><span class="line">req.session.foo = <span class="string">'bar'</span></span><br><span class="line"><span class="comment">//    访问 Session 数据：</span></span><br><span class="line">req.session.foo</span><br></pre></td></tr></table></figure>
+<ul>
+<li>提示： 默认session都是内存存储的，一旦服务器重启就会丢失，真正的开发环境会把session做持久化保存。</li>
+</ul>
+<h2 id="7-重定向问题"><a href="#7-重定向问题" class="headerlink" title="7. 重定向问题"></a>7. 重定向问题</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 服务端重定向只针对同步请求才有效，异步请求无效。此时需要重定向就要在客户端进行</span></span><br><span class="line"><span class="built_in">window</span>.location.href = <span class="string">'/'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由a链接发起的请求，或者form表单中由action发起的请求可以使用 res.redirect() 方法。</span></span><br><span class="line">res.redirect(<span class="string">'/'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="构建项目的完整操作步骤"><a href="#构建项目的完整操作步骤" class="headerlink" title="构建项目的完整操作步骤"></a>构建项目的完整操作步骤</h2><ul>
+<li>创建目录结构</li>
+<li>整合静态页，模板页<ul>
+<li>extend</li>
+<li>include</li>
+<li>block</li>
+</ul>
+</li>
+<li>设计路由，注册，登录，退出</li>
+<li>用户注册<ul>
+<li>客户端：先整理好客户端页面（表单数据的name设置，收集表单数据发送请求）</li>
+<li>服务端： <ul>
+<li>获取客户端发送的表单数据</li>
+<li>操作数据库</li>
+<li>如果数据库操作失败，响应500</li>
+<li>其他根据业务响应不同数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用户登录</li>
+<li>用户退出</li>
+</ul>
+<h2 id="遇到的问题以及解决方法"><a href="#遇到的问题以及解决方法" class="headerlink" title="遇到的问题以及解决方法"></a>遇到的问题以及解决方法</h2><ul>
+<li><p>页面资源都加载完了但是，页面显示不正确，原来是bootstrap版本装了最新版</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> npm默认安装最高版本，可按需求安装特定版本</span></span><br><span class="line">npm uninstall bootstrap</span><br><span class="line">npm install bootstrap@3.3.7</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</div><div class="tags"><a href="/tags/Node/">Node</a></div><div class="post-nav"><a class="next" href="/2018/12/17/Node-(6)/">Node学习（6）</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="20" placeholder="Search"><input type="hidden" name="si" value="jiangleiundo.github.io"><input name="tn" type="hidden" value="bds"><input name="cl" type="hidden" value="3"><input name="ct" type="hidden" value="2097152"><input name="s" type="hidden" value="on"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Study/">Study</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Express/" style="font-size: 15px;">Express</a> <a href="/tags/MongoDB/" style="font-size: 15px;">MongoDB</a> <a href="/tags/Node/" style="font-size: 15px;">Node</a> <a href="/tags/mongoose/" style="font-size: 15px;">mongoose</a> <a href="/tags/Promise/" style="font-size: 15px;">Promise</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/node-blog/">node-blog</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/17/Node-(6)/">Node学习（6）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/Promise/">Promise</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/14/Node-(5)/">Node学习 （5）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/13/mongoose/">mongoose-demo</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/Node-(4)/">Node.js学习（4）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/curd-express/">crud-express</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/11/Node-(3)/">Node.js学习（3）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/08/noded2-2/">Node.js学习（2-2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/07/noded2/">Node.js学习（2）</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://github.com/tufu9441/maupassant-hexo" title="hexo-maupassant" target="_blank">hexo-maupassant</a><ul></ul><a href="https://github.com/jiangleiundo" title="我的GitHub" target="_blank">我的GitHub</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">小方块.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
