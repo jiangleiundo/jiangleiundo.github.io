@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="web前端开发"><title>微信小程序 -- 生活宝 | 小方块</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">微信小程序 -- 生活宝</h1><a id="logo" href="/.">小方块</a><p class="description">Stay Hungry Stay Foolish</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/favorite/"><i class="fa fa-star"> 收藏夹</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">微信小程序 -- 生活宝</h1><div class="post-meta">Mar 13, 2019<span> | </span><span class="category"><a href="/categories/Study/">Study</a></span></div><div class="post-content"><p>这篇文章主要介绍了认识微信小程序以及小程序app的基本构建。<br><a id="more"></a></p>
+<h2 id="1-微信小程序账号与工具"><a href="#1-微信小程序账号与工具" class="headerlink" title="1.微信小程序账号与工具"></a>1.微信小程序账号与工具</h2><ul>
+<li>在线文档：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/" target="_blank" rel="noopener">https://mp.weixin.qq.com/debug/wxadoc/dev/</a></li>
+</ul>
+<h3 id="1-1-小程序开发者账号注册"><a href="#1-1-小程序开发者账号注册" class="headerlink" title="1.1 小程序开发者账号注册"></a>1.1 小程序开发者账号注册</h3><ul>
+<li><p>微信公众平台：<a href="https://mp.weixin.qq.com/" target="_blank" rel="noopener">https://mp.weixin.qq.com/</a></p>
+</li>
+<li><p>小程序开发者账号注册：<a href="https://mp.weixin.qq.com/wxopen/waregister?action=step1" target="_blank" rel="noopener">https://mp.weixin.qq.com/wxopen/waregister?action=step1</a></p>
+</li>
+</ul>
+<h3 id="1-2微信开发者工具"><a href="#1-2微信开发者工具" class="headerlink" title="1.2微信开发者工具"></a>1.2微信开发者工具</h3><ul>
+<li>微信开发者工具：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html" target="_blank" rel="noopener">https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html</a></li>
+</ul>
+<h3 id="1-3小程序在线Demo二维码"><a href="#1-3小程序在线Demo二维码" class="headerlink" title="1.3小程序在线Demo二维码"></a>1.3小程序在线Demo二维码</h3><ul>
+<li>体验小程序官方源码：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/demo/demo.zip" target="_blank" rel="noopener">https://mp.weixin.qq.com/debug/wxadoc/dev/demo/demo.zip</a></li>
+</ul>
+<h2 id="2-微信小程序文件结构与配置"><a href="#2-微信小程序文件结构与配置" class="headerlink" title="2.微信小程序文件结构与配置"></a>2.微信小程序文件结构与配置</h2><p><img src="https://ws1.sinaimg.cn/mw1024/0072Lfvtly1g116lvs8osj30uk0qw41o.jpg" alt="fileTree.jpg"></p>
+<p>页面pages由四个文件组成：</p>
+<table>
+<thead>
+<tr>
+<th>文件类型</th>
+<th>是否必须</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/page.html" target="_blank" rel="noopener">js</a></td>
+<td>是</td>
+<td>页面逻辑 ( 微信小程序没有window和document对象 )</td>
+</tr>
+<tr>
+<td><a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/" target="_blank" rel="noopener">wxml</a></td>
+<td>是</td>
+<td>页面结构  ( XML语法，不是HTML语法 )</td>
+</tr>
+<tr>
+<td><a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxss.html" target="_blank" rel="noopener">wxss</a></td>
+<td>否</td>
+<td>页面样式表 ( <strong>拓展了rpx尺寸单位，微信专属响应式像素</strong> )</td>
+</tr>
+<tr>
+<td><a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#pagejson" target="_blank" rel="noopener">json</a></td>
+<td>否</td>
+<td>页面配置  ( 严格json格式，不能写注释，否则编译报错 )</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1WXML-结构-标签、组件"><a href="#2-1WXML-结构-标签、组件" class="headerlink" title="2.1WXML 结构 (标签、组件)"></a>2.1<code>WXML</code> 结构 (标签、组件)</h3><blockquote>
+<p>组件文档：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/component/" target="_blank" rel="noopener">https://mp.weixin.qq.com/debug/wxadoc/dev/component/</a></p>
+</blockquote>
+<ul>
+<li><p>常用布局标签</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span><span class="tag">&lt;/<span class="name">view</span>&gt;</span>				相当于    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">text</span>&gt;</span><span class="tag">&lt;/<span class="name">text</span>&gt;</span>				相当于    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">image</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span>			     相当于    <span class="tag">&lt;<span class="name">img</span> /&gt;</span></span><br><span class="line">//注意： image组件默认宽度300px、高度225px，一般需要手动设置图片宽高</span><br><span class="line"><span class="tag">&lt;<span class="name">navigator</span>&gt;</span><span class="tag">&lt;/<span class="name">navigator</span>&gt;</span>		 相当于    <span class="tag">&lt;<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">block</span>&gt;</span><span class="tag">&lt;/<span class="name">block</span>&gt;</span>				区块标签，不会渲染到页面</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>轮播图组件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">swiper</span> <span class="attr">indicator-dots</span>=<span class="string">"是否显示面板指示点"</span> <span class="attr">autoplay</span>=<span class="string">"是否自动切换"</span> <span class="attr">interval</span>=<span class="string">"自动切换时间间隔"</span> <span class="attr">duration</span>=<span class="string">"滑动动画时长"</span> <span class="attr">circular</span>=<span class="string">"轮播图无缝连接"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">swiper-item</span>&gt;</span></span><br><span class="line">      	<span class="tag">&lt;<span class="name">image</span> <span class="attr">src</span>=<span class="string">"图片路径1"</span> <span class="attr">width</span>=<span class="string">"375"</span> <span class="attr">height</span>=<span class="string">"150"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">swiper-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">swiper</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- demo --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 设置 autoplay="&#123;&#123;true&#125;&#125;" 和 autoplay 是等价的 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">swiper</span> <span class="attr">indicator-dots</span> <span class="attr">autoplay</span> <span class="attr">duration</span>=<span class="string">'400'</span> <span class="attr">interval</span>=<span class="string">'2500'</span> <span class="attr">circular</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">swiper-item</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;bannerList&#125;&#125;"</span> <span class="attr">wx:key</span>=<span class="string">"id"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">image</span> <span class="attr">mode</span>=<span class="string">'aspectFill'</span> <span class="attr">src</span>=<span class="string">'&#123;&#123;item.url&#125;&#125;'</span>&gt;</span><span class="tag">&lt;/<span class="name">image</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">swiper-item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">swiper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-2-WXSS-样式"><a href="#2-2-WXSS-样式" class="headerlink" title="2.2 WXSS 样式"></a>2.2 <code>WXSS</code> 样式</h3><blockquote>
+<p>WXSS文档： <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxss.html" target="_blank" rel="noopener">https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxss.html</a></p>
+</blockquote>
+<ul>
+<li>与 CSS 相比，WXSS 扩展以下2个特性：<ul>
+<li>尺寸单位   <code>rpx</code> ( responsive pixel 响应式像素) : 可以根据屏幕宽度进行自适应。规定屏幕宽为750rpx。如在 iPhone6 上，屏幕宽度为375px，共有750个物理像素，则750rpx = 375px = 750物理像素，1rpx = 0.5px = 1物理像素。(开发微信小程序时设计师可以用 <code>iPhone6</code> 作为视觉稿的标准)</li>
+<li>样式导入   @import  “样式表路径”;</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3js逻辑"><a href="#2-3js逻辑" class="headerlink" title="2.3js逻辑"></a>2.3<code>js</code>逻辑</h3><blockquote>
+<p>微信小程序没有BOM和DOM概念，所以不能使用window对象和document对象。</p>
+</blockquote>
+<ul>
+<li><p>微信小程序生命周期函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  <span class="comment">/** 页面的初始数据 */</span></span><br><span class="line">  data: &#123;&#125;,</span><br><span class="line">  <span class="comment">/** 生命周期函数--监听页面加载 */</span></span><br><span class="line">  onLoad: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;&#125;,</span><br><span class="line">  <span class="comment">/** 生命周期函数--监听页面初次渲染完成 */</span></span><br><span class="line">  onReady: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  <span class="comment">/** 生命周期函数--监听页面显示 */</span></span><br><span class="line">  onShow: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  <span class="comment">/** 生命周期函数--监听页面隐藏 */</span></span><br><span class="line">  onHide: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line">  <span class="comment">/** 生命周期函数--监听页面卸载 */</span></span><br><span class="line">  onUnload: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pages页面相关事件处理函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 页面相关事件处理函数--监听用户下拉动作 */</span></span><br><span class="line">onPullDownRefresh: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line"><span class="comment">/** 页面上拉触底事件的处理函数 */</span></span><br><span class="line">onReachBottom: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;,</span><br><span class="line"><span class="comment">/** 用户点击右上角分享 */</span></span><br><span class="line">onShareAppMessage: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2-4-JSON配置"><a href="#2-4-JSON配置" class="headerlink" title="2.4 JSON配置"></a>2.4 JSON配置</h3><blockquote>
+<p>配置文档：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html" target="_blank" rel="noopener">https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html</a></p>
+</blockquote>
+<ul>
+<li><p><code>app.json</code> 配置项列表</p>
+<p>| 属性                                                         | 类型         | 必须 | 描述                    |<br>| ———————————————————— | ———— | —- | ———————– |<br>| <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#pages" target="_blank" rel="noopener">pages</a> | String Array | 是   | 设置页面路径            |<br>| <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#window" target="_blank" rel="noopener">window</a> | Object       | 否   | 设置默认页面的窗口表现  |<br>| <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#tabbar" target="_blank" rel="noopener">tabBar</a> | Object       | 否   | 设置底部 tab 的表现     |<br>| <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#networktimeout" target="_blank" rel="noopener">networkTimeout</a> | Object       | 否   | 设置网络超时时间        |<br>| <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#debug" target="_blank" rel="noopener">debug</a> | Boolean      | 否   | 设置是否开启 debug 模式 |</p>
+<p><code>app.json</code> 文件用来对微信小程序进行全局配置，决定页面文件的路径、窗口表现、设置网络超时时间、设置多 tab 等。</p>
+</li>
+</ul>
+<h3 id="2-5-window-配置"><a href="#2-5-window-配置" class="headerlink" title="2.5 window 配置"></a>2.5 window 配置</h3><blockquote>
+<p>window配置：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#window" target="_blank" rel="noopener">https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#window</a></p>
+</blockquote>
+<ul>
+<li><p>设置小程序的状态栏、导航条、标题、窗口背景色。</p>
+<p>| 属性                         | 类型     | 默认值  | 描述                                                         |<br>| —————————- | ——– | ——- | ———————————————————— |<br>| navigationBarBackgroundColor | HexColor | #000000 | 导航栏背景颜色，如”#000000”                                  |<br>| navigationBarTextStyle       | String   | white   | 导航栏标题颜色，仅支持 black/white                           |<br>| navigationBarTitleText       | String   |         | 导航栏标题文字内容                                           |<br>| backgroundColor              | HexColor | #ffffff | 窗口的背景色                                                 |<br>| backgroundTextStyle          | String   | dark    | 下拉背景字体、loading 图的样式，仅支持 dark/light            |<br>| enablePullDownRefresh        | Boolean  | false   | 是否开启下拉刷新，详见<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/page.html#页面相关事件处理函数" target="_blank" rel="noopener">页面相关事件处理函数</a>。 |<br>| onReachBottomDistance        | Number   | 50      | 页面上拉触底事件触发时距页面底部距离，单位为px               |</p>
+<p><strong>注意：页面的<code>.json</code>只能设置 <code>window</code> 相关的配置项，以决定本页面的窗口表现，所以无需写 <code>window</code> 这个关键词。</strong></p>
+</li>
+</ul>
+<h3 id="2-5-tabBar配置"><a href="#2-5-tabBar配置" class="headerlink" title="2.5 tabBar配置"></a>2.5 tabBar配置</h3><blockquote>
+<p>tabBar配置：<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#tabbar" target="_blank" rel="noopener">https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html#tabbar</a></p>
+<p>如果小程序是一个多 tab 应用（客户端窗口的底部或顶部有 tab 栏可以切换页面），可以通过 tabBar 配置项指定 tab 栏的表现，以及 tab 切换时显示的对应页面。</p>
+<p><strong>注意事项：</strong><br>1.当设置 position 为 top 时，将不会显示 icon。<br>2.tabBar 中的 list 是一个数组，<strong>只能配置最少2个、最多5个 tab</strong>，tab 按数组的顺序排序。<br>3.icon 大小限制为40kb，建议尺寸为 81px * 81px。</p>
+</blockquote>
+<ul>
+<li><p>属性说明：</p>
+<p>| 属性            | 类型     | 必填 | 默认值 | 描述                                                 |<br>| ————— | ——– | —- | —— | —————————————————- |<br>| color           | HexColor | 是   |        | tab 上的文字默认颜色                                 |<br>| selectedColor   | HexColor | 是   |        | tab 上的文字选中时的颜色                             |<br>| backgroundColor | HexColor | 是   |        | tab 的背景色                                         |<br>| borderStyle     | String   | 否   | black  | tabbar上边框的颜色， 仅支持 black/white              |<br>| list            | Array    | 是   |        | tab 的列表，详见 list 属性说明，最少2个、最多5个 tab |<br>| position        | String   | 否   | bottom | 可选值 bottom、top，设置成top是无图标                |</p>
+</li>
+<li><p>其中 list 接受一个数组，数组中的每个项都是一个对象，其属性值如下：</p>
+<p>| 属性             | 类型   | 必填 | 说明                                                         |<br>| —————- | —— | —- | ———————————————————— |<br>| pagePath         | String | 是   | 页面路径，必须在 pages 中先定义                              |<br>| text             | String | 是   | tab 上按钮文字                                               |<br>| iconPath         | String | 否   | 图片路径，icon 大小限制为40kb，建议尺寸为 81px <em> 81px，当 postion 为 top 时，此参数无效 |<br>| selectedIconPath | String | 否   | 选中时的图片路径，icon 大小限制为40kb，建议尺寸为 81px </em> 81px ，当 postion 为 top 时，此参数无效 |</p>
+</li>
+</ul>
+<h2 id="3-WXML高级（指令、事件）"><a href="#3-WXML高级（指令、事件）" class="headerlink" title="3.WXML高级（指令、事件）"></a>3.WXML高级（指令、事件）</h2><ul>
+<li><p>数据绑定</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span> &#123;&#123;message&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 不要直接写 checked="false"，其计算结果是一个字符串，转成 boolean 类型后表示true --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">checkbox</span> <span class="attr">checked</span>=<span class="string">"false"</span>&gt;</span> <span class="tag">&lt;/<span class="name">checkbox</span>&gt;</span>	      <span class="comment">&lt;!-- 错误写法 --&gt;</span>				</span><br><span class="line"><span class="tag">&lt;<span class="name">checkbox</span> <span class="attr">checked</span>=<span class="string">"&#123;&#123;false&#125;&#125;"</span>&gt;</span> <span class="tag">&lt;/<span class="name">checkbox</span>&gt;</span>    <span class="comment">&lt;!-- 正确写法 --&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列表渲染<code>wx:for</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;array&#125;&#125;"</span> <span class="attr">wx:key</span>=<span class="string">"id"</span>&gt;</span> &#123;&#123;item&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:for</span>=<span class="string">"&#123;&#123;array&#125;&#125;"</span> <span class="attr">wx:key</span>=<span class="string">"*this"</span>&gt;</span> &#123;&#123;item&#125;&#125; <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>wx:key</code>主要功能：提高列表渲染时排序的效率。（如不提供 <code>wx:key</code>，会报一个 warning， 如果明确知道该列表是静态，或者不必关注其顺序，可以选择忽略）</p>
+<ul>
+<li>字符串，代表在 for 循环的 array 中 item 的某个 property，该 property 的值需要是列表中唯一的字符串或数字，且不能动态改变。</li>
+<li>保留关键字 <code>*this</code> 代表在 for 循环中的 item 本身，这种表示需要 item 本身是一个唯一的字符串或者数字。</li>
+</ul>
+</li>
+<li><p>条件渲染<code>wx:if wx:else wx:elif</code> </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:if</span>=<span class="string">"&#123;&#123;item &gt;= 80&#125;&#125;"</span>&gt;</span> 优秀 <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:elif</span>=<span class="string">"&#123;&#123;item &gt;= 60&#125;&#125;"</span>&gt;</span> 良好 <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">wx:else</span>&gt;</span> 不及格 <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事件</p>
+<ul>
+<li><p>事件对象可以获取额外信息，如 id, dataset(自定义属性集合), touches(触摸点坐标)。</p>
+</li>
+<li><p>事件绑定和冒泡</p>
+<ul>
+<li>冒泡事件：bind事件类型如 <code>bindtap</code>   <code>bindlongpress</code></li>
+<li>非冒泡事件：catch事件类型如<code>catchtap</code>   <code>catchlongpress</code></li>
+</ul>
+</li>
+<li><p>事件传参注意小程序绑定事件只能写函数名称，不能通过括号方式传参：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--错误，事件不能触发--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">bindtap</span>=<span class="string">"tapHandle(item.id)"</span>&gt;</span> 点我触发事件 <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--正确传参，能触发--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">data-index</span>=<span class="string">"&#123;&#123;item.id&#125;&#125;"</span> <span class="attr">bindtap</span>=<span class="string">"tapHandle"</span>&gt;</span> 点我触发事件 <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Page(&#123;</span><br><span class="line">  tapHandle: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123; <span class="comment">// 接收参数</span></span><br><span class="line">     <span class="built_in">console</span>.log( event.target.dataset.index );  <span class="comment">// 输出标签自定义属性上的index值</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-WXS脚本"><a href="#4-WXS脚本" class="headerlink" title="4. WXS脚本"></a>4. WXS脚本</h2><blockquote>
+<p>WXS（WeiXin Script）是小程序的一套脚本语言，结合 <code>WXML</code>，功能类似<code>&lt;script&gt;</code>标签，主要用于在视图层定义函数(比较少用)。</p>
+</blockquote>
+<ul>
+<li><p>注意事项：</p>
+<ol>
+<li>wxs 不依赖于运行时的基础库版本，可以在所有版本的小程序中运行。</li>
+<li>wxs 与 javascript 是不同的语言，有自己的语法，并不和 javascript 一致。</li>
+<li>wxs 的运行环境和其他 javascript 代码是隔离的，wxs 中不能调用其他 javascript 文件中定义的函数，也不能调用小程序提供的API。</li>
+<li>wxs 函数不能作为组件的事件回调。</li>
+<li>由于运行环境的差异，在 iOS 设备上小程序内的 wxs 会比 javascript 代码快 2 ~ 20 倍。在 android 设备上二者运行效率无差异。</li>
+</ol>
+</li>
+<li><p>demo</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--wxml--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span>&#123;&#123; foo.sum(2,3) &#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- wxs类似script，可在wxml中定义方法（不常用） --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">wxs</span> <span class="attr">module</span>=<span class="string">"foo"</span>&gt;</span></span><br><span class="line">    module.exports = &#123;</span><br><span class="line">        sum: function(a, b) &#123;</span><br><span class="line">            return a + b</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">wxs</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-备注"><a href="#5-备注" class="headerlink" title="5.备注"></a>5.备注</h2><h3 id="5-1-小程序开发者工具常用快捷键"><a href="#5-1-小程序开发者工具常用快捷键" class="headerlink" title="5.1 小程序开发者工具常用快捷键"></a>5.1 小程序开发者工具常用快捷键</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shift + Alt + F</td>
+<td>格式化代码</td>
+</tr>
+<tr>
+<td>Ctrl + P</td>
+<td>跳到文件</td>
+</tr>
+<tr>
+<td>Ctrl + E</td>
+<td>跳到最近文件</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + P</td>
+<td>上传扫码预览</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + I</td>
+<td>显示/隐藏调试器</td>
+</tr>
+<tr>
+<td>Shift + Alt + 上/下箭头</td>
+<td>直接复制被选中部分</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-2实现下拉刷新设置"><a href="#5-2实现下拉刷新设置" class="headerlink" title="5.2实现下拉刷新设置"></a>5.2实现下拉刷新设置</h3><ul>
+<li><p>在.json文件中设置</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 注意：如果刷新本页面就只在当前的json文件中添加，如果需要所有页面都实现下拉刷新就将下面的代码添加到app.json中</span><br><span class="line">"enablePullDownRefresh": true</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这是可以实现下拉刷新，但是看不见刷新时的loading效果，去掉app.json中window对象下的默认背景文字样式就行了</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"backgroundTextStyle": "light",</span><br></pre></td></tr></table></figure>
+<p>注意：下拉刷新需要在请求数据后清除刷新效果（手机端）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">onPullDownRefresh: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// xxxx重置参数，重新加载</span></span><br><span class="line">    <span class="comment">// 下拉刷新手机上需要清除刷新效果</span></span><br><span class="line">    wx.stopPullDownRefresh();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</div><div class="tags"><a href="/tags/小程序/">小程序</a></div><div class="post-nav"><a class="next" href="/2019/03/06/flex/">flex布局</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="20" placeholder="Search"><input type="hidden" name="si" value="jiangleiundo.github.io"><input name="tn" type="hidden" value="bds"><input name="cl" type="hidden" value="3"><input name="ct" type="hidden" value="2097152"><input name="s" type="hidden" value="on"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Study/">Study</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/vue/" style="font-size: 15px;">vue</a> <a href="/tags/Node/" style="font-size: 15px;">Node</a> <a href="/tags/中间件/" style="font-size: 15px;">中间件</a> <a href="/tags/MongoDB/" style="font-size: 15px;">MongoDB</a> <a href="/tags/Promise/" style="font-size: 15px;">Promise</a> <a href="/tags/Gzip/" style="font-size: 15px;">Gzip</a> <a href="/tags/express/" style="font-size: 15px;">express</a> <a href="/tags/mongoose/" style="font-size: 15px;">mongoose</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/reactJS/" style="font-size: 15px;">reactJS</a> <a href="/tags/todomvc/" style="font-size: 15px;">todomvc</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/Express/" style="font-size: 15px;">Express</a> <a href="/tags/vue组件/" style="font-size: 15px;">vue组件</a> <a href="/tags/vue-resource/" style="font-size: 15px;">vue-resource</a> <a href="/tags/json-server/" style="font-size: 15px;">json-server</a> <a href="/tags/vuex/" style="font-size: 15px;">vuex</a> <a href="/tags/babel/" style="font-size: 15px;">babel</a> <a href="/tags/router/" style="font-size: 15px;">router</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/mint-ui/" style="font-size: 15px;">mint-ui</a> <a href="/tags/flex/" style="font-size: 15px;">flex</a> <a href="/tags/VueRouter/" style="font-size: 15px;">VueRouter</a> <a href="/tags/cms/" style="font-size: 15px;">cms</a> <a href="/tags/小程序/" style="font-size: 15px;">小程序</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/03/13/wx-xcx/">微信小程序 -- 生活宝</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/06/flex/">flex布局</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/27/todomvc/">todomvc</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/12/react02/">reactJS（2）</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/02/09/react-base/">reactJS</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/31/apache-gzip/">Apache-Gzip</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/30/vuex/">vuex</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/27/webpack-cms/">webpack-cms</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/23/webpack-ui/">webpack-ui</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/21/webpack-router/">webpack-router</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://github.com/tufu9441/maupassant-hexo" title="hexo-maupassant" target="_blank">hexo-maupassant</a><ul></ul><a href="https://github.com/jiangleiundo" title="我的GitHub" target="_blank">我的GitHub</a><ul></ul><a href="https://www.cnblogs.com/codebook/" title="博客园" target="_blank">博客园</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">小方块.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
