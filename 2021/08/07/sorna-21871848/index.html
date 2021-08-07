@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="web前端开发"><title>SonarLint 代码扫描错误提示总结 | 小方块的世界</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">SonarLint 代码扫描错误提示总结</h1><a id="logo" href="/.">小方块的世界</a><p class="description">Stay Hungry Stay Foolish</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/favorite/"><i class="fa fa-star"> 收藏夹</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">SonarLint 代码扫描错误提示总结</h1><div class="post-meta">Aug 7, 2021<span> | </span><span class="category"><a href="/categories/Web/">Web</a></span></div><div class="post-content"><p>这篇文章主要介绍了使用sorna扫描代码出现的错误提示总结。<br><a id="more"></a></p>
+<ul>
+<li>Avoid long parameter lists.</li>
+</ul>
+<p>方法参数过多，最多允许5个</p>
+<ul>
+<li>Missing a Javadoc comment.</li>
+</ul>
+<p>需要注释</p>
+<ul>
+<li>Expected @param tag for ‘area’.</li>
+</ul>
+<p>需要注释</p>
+<ul>
+<li>Expected @return tag.</li>
+</ul>
+<p>需要注释</p>
+<ul>
+<li>Expected @throws tag for ‘Exception’.</li>
+</ul>
+<p>需要注释</p>
+<ul>
+<li>Unused @param tag for ‘licenseInfoMap’.</li>
+</ul>
+<p>修改注释</p>
+<ul>
+<li>Line is longer than 160 characters (found 162).</li>
+</ul>
+<p>每一行代码不得超过160个字符，需要分行</p>
+<ul>
+<li>Add a private constructor to hide the implicit public one.</li>
+</ul>
+<p>常量类和工具类需要一个私有的构造器，同时将该类定义为final，不可继承</p>
+<ul>
+<li>Variables that are final and static should be all capitals, ‘logger’ is not all capitals.</li>
+</ul>
+<p>final修饰的变量名称需要全部大写</p>
+<ul>
+<li>Only variables that are final should contain capitals (except for underscores in standard prefix/suffix), ‘_tar’ is not final.</li>
+</ul>
+<p>只有final修饰的变量名称中才可以有下划线，要么去掉下划线，要么加上final修饰符，Map，List和java对象加上final修饰符后，代表这个对象指向的内存地址不可变，但内容和值都是可以改变的</p>
+<ul>
+<li>Name ‘_targetDataSources’ must match pattern ‘(^[a-z][a-z0-9][a-zA-Z0-9]{0,50}$)’.</li>
+</ul>
+<p>变量命名需要符合正则表达式</p>
+<ul>
+<li>The field name indicates a constant but its modifiers do not</li>
+</ul>
+<p>变量没有final修饰却使用了final变量的命名规则</p>
+<ul>
+<li>Variables should start with a lowercase character, ‘SUSPEND_MAP’ starts with uppercase character.</li>
+</ul>
+<p>普通变量（即没有final修饰）需要驼峰式命名，首字母为小写</p>
+<ul>
+<li>More than 8 parameters (found 9).</li>
+</ul>
+<p>构造方法只能有7个参数</p>
+<ul>
+<li>Constructor has 9 parameters, which is greater than 7 authorized.</li>
+</ul>
+<p>构造方法只能有7个参数</p>
+<ul>
+<li>Define a constant instead of duplicating this literal “muluList” 6 times.</li>
+</ul>
+<p>某个字符串出现了4次或以上，需要定义一个常量来代替</p>
+<ul>
+<li>A method/constructor shouldnt explicitly throw java.lang.Exception</li>
+</ul>
+<p>不能直接抛出Exception，需要精确到具体的异常，且最多抛出4个，超过请try catch</p>
+<ul>
+<li>Define and throw a dedicated exception instead of using a generic one.</li>
+</ul>
+<p>不能直接抛出Exception，需要精确到具体的异常，且最多抛出4个，超过请try catch</p>
+<ul>
+<li>Remove this useless assignment to local variable “orgnIdL”.</li>
+</ul>
+<p>一个没有使用的变量，删掉即可</p>
+<ul>
+<li>Avoid unused private fields such as ‘fastGroup’.</li>
+</ul>
+<p>一个没有使用的变量，删掉即可。如果不能删，则将private改为protected或default即可。</p>
+<ul>
+<li>Exceptional return value of java.io.File.mkdirs() ignored in …</li>
+</ul>
+<p>mkdirs方法有返回值，如果是false则代表文件夹创建失败，需要处理。判断返回值是否正确，并进行处理，如记日志或抛异常等</p>
+<ul>
+<li>Exceptional return value of java.io.File.delete() ignored in …</li>
+</ul>
+<p>delete方法有返回值，如果是false则代表文件删除失败，需要处理。判断返回值是否正确，并进行处理，如记日志或抛异常等</p>
+<ul>
+<li>Use “java.nio.Files#delete” here for better messages on error conditions.</li>
+</ul>
+<p>使用Files.delete(file.toPath())来代替file.delete()</p>
+<ul>
+<li>Suspicious comparison of a Integer reference to constant in …</li>
+</ul>
+<p>Integer需要使用equals来比较，这是由于超出(-128~127)范围后，==无法比较，但equals性能较低</p>
+<ul>
+<li>Refactor the code in order to not assign to this loop counter from within the loop body.</li>
+</ul>
+<p>不要在循环体内操作计数器，重构代码</p>
+<ul>
+<li>Rename “jdbcTemplate” which hides the field declared at line 116.</li>
+</ul>
+<p>一个类中变量名称重复，重命名变量名称即可</p>
+<ul>
+<li>Field ssoServer has the same name as a method</li>
+</ul>
+<p>一个类中字段名称和方法名称重复，重命名即可</p>
+<ul>
+<li>Merge this if statement with the enclosing one.</li>
+</ul>
+<p>多个if可以合并，合并成一个</p>
+<ul>
+<li>Replace the synchronized class “StringBuffer” by an unsynchronized one such as “StringBuilder”.</li>
+</ul>
+<p>StringBuffer需要换成StringBuilder</p>
+<ul>
+<li>A “NullPointerException” could be thrown; “dataResults” is nullable here.</li>
+</ul>
+<p>在使用对象之前需要对这个对象进行非空判断</p>
+<ul>
+<li>Possible null pointer dereference of track in …</li>
+</ul>
+<p>在使用对象之前需要对这个对象进行非空判断</p>
+<ul>
+<li>Update this method so that its implementation is not identical to “getDvStatus” on line 149.</li>
+</ul>
+<p>两个方法的内容完全一致，不用写两遍，在其中一个方法中调用另一个方法即可。或者删掉一个，全部使用另一个方法</p>
+<ul>
+<li>Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.</li>
+</ul>
+<p>空的方法体内部需要写一个注释</p>
+<ul>
+<li>Avoid throwing raw exception types.</li>
+</ul>
+<p>自定义一个异常来继承RuntimeException，然后抛出这个自定义的异常，而不是抛出通用的RuntimeException</p>
+<ul>
+<li>Define and throw a dedicated exception instead of using a generic one.</li>
+</ul>
+<p>自定义一个异常来继承RuntimeException，然后抛出这个自定义的异常，而不是抛出通用的RuntimeException</p>
+<ul>
+<li>New exception is thrown in catch block, original stack trace may be lost</li>
+</ul>
+<p>在catch中抛出异常会使抛出的异常混淆，所以抛出的异常必须带着原异常信息。例如：throw new BusinessException(errorMsg, e)这里第二个参数是必须的</p>
+<ul>
+<li>Avoid empty catch blocks</li>
+</ul>
+<p>catch代码块不能为空</p>
+<ul>
+<li>Either remove or fill this block of code.</li>
+</ul>
+<p>删掉或填充这个代码块</p>
+<ul>
+<li>Return an empty collection instead of null.</li>
+</ul>
+<p>返回空集合Collections.emptyList()而不是null</p>
+<ul>
+<li>Put single-quotes around ‘-‘ to use the faster “indexOf(char)” method.</li>
+</ul>
+<p>将双引号改为单引号，理由是用char来找字符比用String来找效率更高</p>
+<ul>
+<li>Method length is 221 lines (max allowed is 200).</li>
+</ul>
+<p>一个方法最多200行，试着压缩，实在不行只能拆成多个方法</p>
+<ul>
+<li>Avoid printStackTrace(); use a logger call instead.</li>
+</ul>
+<p>catch中使用logger.error来代替e.printStackTrace()。Logger logger = LoggerFactory.getLogger(this.getClass())。记住，logger不可以在数据库对象类中使用</p>
+<ul>
+<li>Remove this expression which always evaluates to “true”</li>
+</ul>
+<p>这个判断语句总是为true，删掉即可</p>
+<ul>
+<li>… concatenates strings using + in a loop</li>
+</ul>
+<p>在循环中String不要用加号来拼接，而是使用StringBuilder</p>
+<ul>
+<li>Avoid using implementation types like ‘LinkedHashMap’; use the interface instead</li>
+</ul>
+<p>在方法的参数中不要使用具体的实现类对象，而是使用它的接口对象。例如：不用LinkedHashMap而用Map</p>
+<ul>
+<li>Iterate over the “entrySet” instead of the “keySet”.</li>
+</ul>
+<p>遍历Map不使用keySet而使用entrySet</p>
+<ul>
+<li>… makes inefficient use of keySet iterator instead of entrySet iterator</li>
+</ul>
+<p>遍历Map不使用keySet而使用entrySet</p>
+<ul>
+<li>Move constants to a class or enum.</li>
+</ul>
+<p>接口中不要定义常量，移到常量类中</p>
+<ul>
+<li>Boxing/unboxing to parse a primitive …</li>
+</ul>
+<p>使用parse方法来代替valueOf方法</p>
+<ul>
+<li>Null passed for non-null parameter of …</li>
+</ul>
+<p>将一个可能为空的参数传到了一个方法中，但在该方法中，该参数不可为空。修改这个方法，在使用变量前进行非空判断，则这个参数就成为了可为空参数</p>
+<ul>
+<li>Remove this “Integer” constructor</li>
+</ul>
+<p>不要使用new Integer来初始化变量的值，使用Integer.valueOf</p>
+<ul>
+<li>new com.model.CatalogInfo() invokes inefficient new Integer(int) constructor; use Integer.valueOf(int) instead</li>
+</ul>
+<p>不要使用new Integer来初始化变量的值，使用Integer.valueOf</p>
+<ul>
+<li>HTTP parameter directly written to HTTP header output in …</li>
+</ul>
+<p>resp.setHeader(“Content-Disposition”, “attachment;filename = “ + fileName)改为resp.setHeader(“Content-Disposition”, “attachment;filename = “ + new String(fileName.getBytes(“GBK”), “ISO8859-1”))</p>
+<p>Relative path traversal in …</p>
+<p>new File(filePath + fileName)改为new File(filePath, fileName)。还有使用new FileInputStream(File srcFile)而不是使用new FileInputStream(filePath + fileName)</p>
+<p>Boxing/unboxing to parse a primitive …</p>
+<p>.valueOf改为.parseXXX，这是由于valueOf返回的是包装类对象，而parseXXX返回的是值</p>
+<ul>
+<li>Use try-with-resources or close this “FileInputStream” in a “finally” clause.</li>
+</ul>
+<p>使用try(FileInputStream inFile = new FileInputStream(file)){System.out.println(“…”)}catch{}且不需要finally代码块来关闭，这是jdk1.7的新写法，可以将一些可自动关闭的资源写在try()中，就可以直接实现自动关闭</p>
+<ul>
+<li>Change this “try” to a try-with-resources. (sonar.java.source not set. Assuming 7 or greater.)</li>
+</ul>
+<p>使用try(FileInputStream inFile = new FileInputStream(file)){System.out.println(“…”)}catch{}且不需要finally代码块来关闭，这是jdk1.7的新写法，可以将一些可自动关闭的资源写在try()中，就可以直接实现自动关闭</p>
+<ul>
+<li>Replace this use of System.out or System.err by a logger.</li>
+</ul>
+<p>System.out换成logger.info。记住，logger不可以在数据库对象类中使用。</p>
+<ul>
+<li>System.out.println is used</li>
+</ul>
+<p>System.out换成logger.info。记住，logger不可以在数据库对象类中使用。</p>
+<ul>
+<li>Variable ‘auditTypeName’ must be private and have accessor methods.</li>
+</ul>
+<p>只有静态变量才可以用public修饰，所以public改为private或protected或default</p>
+<ul>
+<li>The return value of “valueOf” must be used.</li>
+</ul>
+<p>这个语句的返回值必须要被使用，删掉或者使用它</p>
+<ul>
+<li>Return value of String.valueOf(Object) ignored in …</li>
+</ul>
+<p>这个语句的返回值必须要被使用，删掉或者使用它</p>
+<ul>
+<li>Synchronize this method to match the synchronization on “setSuspendMap”.</li>
+</ul>
+<p>一组get和set方法，如果其中一个方法被synchronized修饰，则另一个也需要使用synchronized 修饰</p>
+<ul>
+<li>An empty statement (semicolon) not part of a loop</li>
+</ul>
+<p>双分号导致sonar认为两个分号之间有一个空语句，删掉一个分号即可</p>
+<ul>
+<li>Avoid empty if statements</li>
+</ul>
+<p>if代码块不能为空，删掉或填充代码</p>
+<ul>
+<li>A class which only has private constructors should be final</li>
+</ul>
+<p>有private构造函数的类需定义为final类</p>
+<ul>
+<li>Class Convert2Track should be declared as final.</li>
+</ul>
+<p>该类需定义为final类</p>
+<ul>
+<li>Verify this is the key that was intended; it was already set before.</li>
+</ul>
+<p>该key之前已被塞入过一次，一个key塞两次没有意义，去掉一次</p>
+<ul>
+<li>Extract this nested try block into a separate method.</li>
+</ul>
+<p>不要在try代码块中再次使用try，去掉内部的，或者把内部的try代码块拉到外面去</p>
+<ul>
+<li>Absolute path traversal in …</li>
+</ul>
+<p>直接将文件的绝对路径传到后台，然后生成File对象即会报错。如D:\1.jpg,不可直接传绝对路径，如果知道这个文件会在d盘，可定义常量D:\，然后传值为1.jpg，后台进行拼接后生成File对象即可</p>
+<ul>
+<li>Only one statement per line allowed.</li>
+</ul>
+<p>每一行只允许一个语句，可能是多写了分号，去掉即可</p>
+<ul>
+<li>Make this anonymous inner class a lambda (sonar.java.source not set. Assuming 8 or greater.)</li>
+</ul>
+<p>jdk1.8之后推荐使用兰布达表达式。请参考：<a href="https://blog.csdn.net/qq_33865313/article/details/81203412" target="_blank" rel="noopener">https://blog.csdn.net/qq_33865313/article/details/81203412</a></p>
+<ul>
+<li>Non-virtual method call in … passes null for non-null parameter of …</li>
+</ul>
+<p>将一个可能为空的参数传到了一个方法中，但在该方法中，该参数不可为空。修改这个方法，在使用变量前进行非空判断，则这个参数就成为了可为空参数</p>
+<ul>
+<li>A “NullPointerException” could be thrown; “printStream” is nullable here.</li>
+</ul>
+<p>可能会抛出空指针异常，先进行非空判断</p>
+<ul>
+<li>… could be null and is guaranteed to be dereferenced in …</li>
+</ul>
+<p>可能会抛出空指针异常，先进行非空判断</p>
+<ul>
+<li>Unused import - …</li>
+</ul>
+<p>引入了一个类，但是没有使用，删掉即可</p>
+<ul>
+<li>2’ is a magic number.</li>
+</ul>
+<p>这是一个魔术数字，需要定义一个常量，然后引用常量，而不是直接使用这个数字</p>
+<ul>
+<li>+’ is preceded with whitespace.</li>
+</ul>
+<p>代码之前不能有空格，删掉空格即可</p>
+<ul>
+<li>;’ is not followed by whitespace.</li>
+</ul>
+<p>代码之后没有空格，需要添加一个空格</p>
+<ul>
+<li>?’ is not preceded with whitespace.</li>
+</ul>
+<p>代码之前没有空格，需要添加一个空格</p>
+<ul>
+<li>Redundant ‘private’ modifier.</li>
+</ul>
+<p>这个修饰符是多余的，删掉该修饰符即可</p>
+<ul>
+<li>Incorrect lazy initialization of static field</li>
+</ul>
+<p>对静态变量的延迟初始化有问题。一般可以试着把static修饰符去掉，或者在静态代码块中进行static变量的初始化。</p>
+<ul>
+<li>… Service not allowed Autowired field …</li>
+</ul>
+<p>Service中不允许自动注解Manager,一般Service中都是注解其他Service，删掉这个Manager，换成相同功能的Service</p>
+<ul>
+<li>Unread field: … should this field be static?</li>
+</ul>
+<p>final修饰的字段需要加上static修饰符</p>
+<ul>
+<li>member def modifier’ has incorrect indentation level 8, expected level should be 4.</li>
+</ul>
+<p>缩进不对，可以删掉前面的缩进，用Tab键缩进，或者MyEclipse用Ctrl+Shift+F格式化代码</p>
+<ul>
+<li>Change this code to use a stronger protocol.</li>
+</ul>
+<p>修改编码以使用更强壮的协议，照着给的编码改就行</p>
+<ul>
+<li>for child at indentation level 21 not at correct indentation, 20</li>
+</ul>
+<p>首行缩进不对，使用Tab键进行缩进</p>
+<ul>
+<li>0 is a valid index, but is ignored by this check.</li>
+</ul>
+<p>0是一个有效的值，但在这里不能用。一般都是要用特殊的值，比如indexOf应该使用&gt;=0或&gt;-1</p>
+<ul>
+<li>Use already-defined constant ‘…’ instead of duplicating its value here.</li>
+</ul>
+<p>使用已经定义的常量，而不是在这里复制它的值</p>
+<ul>
+<li>Using the ‘.*’ form of import should be avoided - …</li>
+</ul>
+<p>不要使用.*的方式将所有类导入进来，而应该详细的导入每一个用到的类</p>
+</div><div class="tags"><a href="/tags/Sorna/">Sorna</a></div><div class="post-nav"><a class="next" href="/2021/08/07/el-table-refersh-shake-21871855/">el-table排序后页面抖动</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank"><input type="search" name="word" maxlength="20" placeholder="Search"><input type="hidden" name="si" value="jiangleiundo.github.io"><input name="tn" type="hidden" value="bds"><input name="cl" type="hidden" value="3"><input name="ct" type="hidden" value="2097152"><input name="s" type="hidden" value="on"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Demo/">Demo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Library/">Library</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mood/">Mood</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Study/">Study</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/npm/" style="font-size: 15px;">npm</a> <a href="/tags/tool/" style="font-size: 15px;">tool</a> <a href="/tags/Promise/" style="font-size: 15px;">Promise</a> <a href="/tags/Express/" style="font-size: 15px;">Express</a> <a href="/tags/Gzip/" style="font-size: 15px;">Gzip</a> <a href="/tags/JavaScript/" style="font-size: 15px;">JavaScript</a> <a href="/tags/book/" style="font-size: 15px;">book</a> <a href="/tags/carousel/" style="font-size: 15px;">carousel</a> <a href="/tags/Javascript/" style="font-size: 15px;">Javascript</a> <a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/express/" style="font-size: 15px;">express</a> <a href="/tags/Vue/" style="font-size: 15px;">Vue</a> <a href="/tags/Node/" style="font-size: 15px;">Node</a> <a href="/tags/Echarts/" style="font-size: 15px;">Echarts</a> <a href="/tags/Element/" style="font-size: 15px;">Element</a> <a href="/tags/element/" style="font-size: 15px;">element</a> <a href="/tags/reg/" style="font-size: 15px;">reg</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/valid/" style="font-size: 15px;">valid</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/iview/" style="font-size: 15px;">iview</a> <a href="/tags/Axios/" style="font-size: 15px;">Axios</a> <a href="/tags/mongoose/" style="font-size: 15px;">mongoose</a> <a href="/tags/Components/" style="font-size: 15px;">Components</a> <a href="/tags/MongoDB/" style="font-size: 15px;">MongoDB</a> <a href="/tags/Tool/" style="font-size: 15px;">Tool</a> <a href="/tags/reactJS/" style="font-size: 15px;">reactJS</a> <a href="/tags/todomvc/" style="font-size: 15px;">todomvc</a> <a href="/tags/Vscode/" style="font-size: 15px;">Vscode</a> <a href="/tags/Iview/" style="font-size: 15px;">Iview</a> <a href="/tags/Router/" style="font-size: 15px;">Router</a> <a href="/tags/Mock/" style="font-size: 15px;">Mock</a> <a href="/tags/Eslint/" style="font-size: 15px;">Eslint</a> <a href="/tags/Jest/" style="font-size: 15px;">Jest</a> <a href="/tags/Vuex/" style="font-size: 15px;">Vuex</a> <a href="/tags/libs/" style="font-size: 15px;">libs</a> <a href="/tags/babel/" style="font-size: 15px;">babel</a> <a href="/tags/router/" style="font-size: 15px;">router</a> <a href="/tags/echarts/" style="font-size: 15px;">echarts</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/flex/" style="font-size: 15px;">flex</a> <a href="/tags/Regexp/" style="font-size: 15px;">Regexp</a> <a href="/tags/Sorna/" style="font-size: 15px;">Sorna</a> <a href="/tags/mint-ui/" style="font-size: 15px;">mint-ui</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/Github/" style="font-size: 15px;">Github</a> <a href="/tags/cms/" style="font-size: 15px;">cms</a> <a href="/tags/小程序/" style="font-size: 15px;">小程序</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/sorna-21871848/">SonarLint 代码扫描错误提示总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/el-table-refersh-shake-21871855/">el-table排序后页面抖动</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/08/07/el-table-summary-directive-21871856/">el-table合计数据以及多行显示问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/05/13/vue-render-20210513/">通过调用函数把组件实例this传递到被应用的js文件里</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/27/vue-test-jest-2021-04-27/">jest vue 单元测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/27/vuex-getters-2021-04-27/">vuex getters使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/04/17/vue-element-tree-select/">一个优雅的tree组件（单选|多选）</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/16/book-duansheli/">读书笔记 -《断舍离》</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/02/16/el-input-tips/">一个带提示的elementUI输入组件实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/12/08/git-github-20201208/">git免密提交</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://github.com/tufu9441/maupassant-hexo" title="maupassant" target="_blank">maupassant</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2021 <a href="/." rel="nofollow">小方块的世界.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
